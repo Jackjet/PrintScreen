@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Class-Path: lib/jintellitype-1.3.9.jar   
+Main-Class: com.olivelv.keytest.ScreenPrint 

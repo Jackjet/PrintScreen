@@ -1,1 +1,0 @@
-start ../jre7/bin/java.exe -jar server.jar
