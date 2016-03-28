@@ -13,6 +13,8 @@ package com.olivelv.keytest;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
@@ -23,6 +25,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
+
 import com.melloware.jintellitype.HotkeyListener;
 import com.melloware.jintellitype.JIntellitype;
 
@@ -64,7 +67,7 @@ public class ScreenPrint {
 	public void getImage() {
 		System.out.println("get Image");
 		try {
-			Image image = getImageFromClipboard();
+			//Image image = getImageFromClipboard();
 			long curr=System.currentTimeMillis();
 			String path=base+Long.toString(curr)+".jpg";
 			File f = new File(base);  
@@ -72,12 +75,29 @@ public class ScreenPrint {
                 f.mkdir();    
             }  
             // 获取截图，并保存
-			savePic(image,path);
+			//savePic(image,path);
+            snapShot(path);
 			// 发送图片
 			client.sendFile(path);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		}
+	}
+	public void snapShot(String path) {
+		try {
+			Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+			// 拷贝屏幕到一个BufferedImage对象screenshot
+			BufferedImage screenshot = (new Robot())
+					.createScreenCapture(new Rectangle(0, 0,
+							(int) dim.getWidth(), (int) dim.getHeight()));
+			File f = new File(path);
+			System.out.print("Save File " + path);
+			// 将screenshot对象写入图像文件
+			ImageIO.write(screenshot, "jpg", f);
+			System.out.print(" Finished!\n");
+		} catch (Exception ex) {
+			System.out.println(ex);
 		}
 	}
 	// 从剪切板中获取图片，保存到Image对象中
