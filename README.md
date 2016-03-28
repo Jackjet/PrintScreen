@@ -23,6 +23,7 @@
 点击该文件，可选择启动客户端或服务端。
 
 ## 问题
-+ 还没有找到第三方jar包jintellitype直接监听print screen键的方法
++ 还没有找到第三方jar包jintellitype直接监听print screen键的方法（已解决）  
+通过robot的方法createScreenCapture直接获取全屏截屏，原来的方法必须先按print screen键，在按ctrl+s读取剪切板中的图片。
 + jre7文件不够简化
-+ 没有判断剪切板中内容的类型（文本、图片）
++ 没有判断剪切板中内容的类型（文本、图片）（不考虑）
